@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Search Engine</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        #show_more{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 class="text-center mt-4">Image search Engine</h3>
+    <form class="d-flex justify-content-center mt-3" id="search_form">
+        <input class="form-control me-sm-2 w-25" id="search_text" type="search" placeholder="Search">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit" id="search">Search</button>
+    </form>
+    <div class="container mt-3">
+        <div class="row" id="img_container">
+            
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-primary mb-3" id="show_more">Show More</button>
+        </div>
+    </div>
+</body>
+<script src="js/script.js"></script>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Operation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="bootstrap.min1.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="card card-shadow mt-5 p-4">
+            <div class="my_logo text-center display-4">
+                <i class="fa-solid fa-clipboard"></i> <span>MY FORM</span>
+            </div>
+            <form id="data_form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password">
+                </div>
+                <button class="btn btn-success btn-lg mt-3" id="add_btn"><i class="fa-solid fa-user-plus"></i>
+                    ADD</button>
+            </form>
+            <table class="table table-striped mt-4" id="data_table">
+                <thead>
+                    <tr>
+                        <th>Sl No.</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tbody id="data_details">
+                    <!-- <tr>
+                        <th scope="row">Khanjan</th>
+                        <td>Khanjan@gnail.com</td>
+                        <td>12345</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i>
+                                Update</button>
+                            <button class="btn btn-danger btn-sm"><i class="fa-solid fa-user-xmark"></i> Delete</button>
+                        </td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript">
+    const name = document.querySelector("#name");
+    const email = document.querySelector("#email");
+    const pass = document.querySelector("#password");
+    const add_btn = document.querySelector("#add_btn");
+    const data_details = document.querySelector("#data_details");
+    const my_form = document.querySelector("#data_form");
+    let dataArray = [];
+    let id = null;
+
+    let obj_str = localStorage.getItem("data");
+    if(obj_str != null){
+    dataArray = JSON.parse(obj_str);
+    }
+    displayData()
+    add_btn.addEventListener('click', function () {
+
+        const name_value = name.value;
+        const email_value = email.value;
+        const pass_value = pass.value;
+
+        if (name_value == '' && email_value == '' && pass_value == '') {
+            alert("Please filled the form");
+        } else {
+            if (id != null) {
+                dataArray[id].name = name_value;
+                dataArray[id].email = email_value;
+                dataArray[id].pass = pass_value;
+            } else {
+                dataArray.push({
+                    "name": name_value,
+                    "email": email_value,
+                    "pass": pass_value
+                });
+            }
+            addData(dataArray);
+            displayData();
+        }
+    });
+
+    function addData() {
+        let str = JSON.stringify(dataArray)
+        localStorage.setItem("data", str);
+    }
+
+    function displayData() {
+        let html = '';
+        dataArray.forEach((data, index) => {
+            html += `<tr>
+                    <th scope="row">${index + 1}</th>
+                    <th>${data.name}</th>
+                    <td>${data.email}</td>
+                    <td>${data.pass}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" i onclick="updateData(${index})"><i class="fa-solid fa-pen-to-square"></i>
+                        Update</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteData(${index})"><i class="fa-solid fa-user-xmark"></i> Delete</button>
+                    </td>
+                </tr>`;
+        });
+        data_details.innerHTML = html;
+    }
+
+    function updateData(index) {
+        id = index;
+        name.value = dataArray[id].name;
+        email.value = dataArray[id].email;
+        pass.value = dataArray[id].pass;
+        add_btn.innerText = 'Update';
+    }
+
+    function deleteData(index) {
+        dataArray.splice(index, 1);
+        addData(dataArray);
+        displayData()
+    }
+</script>
+
+</html>
