@@ -47,7 +47,7 @@ function displayTodo() {
         const fontIcon = text.completed ? 'fa-regular fa-trash-can' : '';
 
         html += `
-        <div class="col-lg-6">
+        <div class="col-lg-3">
             <div class="card text-white ${cardClass} mb-3 mt-5" style="max-width: 20rem;">
                 <div class="card-header d-flex justify-content-between" style="background: ${cardBgColor};">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault_${index}" ${text.completed ? 'checked' : ''} onclick= "toggleCompleted(${index})">
@@ -77,6 +77,51 @@ function deleteTodo(index) {
     });
     setTodo(todoArray);
 }
+
+const searchInput = document.querySelector("#search_input");
+searchInput.addEventListener('input', searchTodo);
+
+function searchTodo() {
+    const searchInput = document.querySelector("#search_input");
+    const searchQuery = searchInput.value.toLowerCase();
+
+    const filteredTodos = todoArray.filter((todo) => {
+        return todo.todo.toLowerCase().includes(searchQuery);
+    });
+
+    displayFilteredTodos(filteredTodos);
+}
+
+function displayFilteredTodos(filteredTodos) {
+    const card_text = document.querySelector("#card_text");
+    let html = '';
+
+    filteredTodos.forEach((text, index) => {
+        const cardClass = text.completed ? 'bg-success' : 'bg-danger';
+        const cardStatus = text.completed ? 'Completed' : 'On Process';
+        const cardColor = text.completed ? 'green' : 'red';
+        const cardBgColor = text.completed ? '#bae2ba' : '#e9aaaa';
+        const fontIcon = text.completed ? 'fa-regular fa-trash-can' : '';
+
+        html += `
+        <div class="col-lg-3">
+            <div class="card text-white ${cardClass} mb-3 mt-5" style="max-width: 20rem;">
+                <div class="card-header d-flex justify-content-between" style="background: ${cardBgColor};">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault_${index}" ${text.completed ? 'checked' : ''} onclick= "toggleCompleted(${index})">
+                    <h6 style="font-weight: 800; color: ${cardColor};">${cardStatus} !! <i
+                    class="${fontIcon}" onclick = "deleteTodo(${index})" style="color: red;"></i></h6>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">${text.todo}</p>
+                </div>
+            </div>
+        </div>`;
+    });
+
+    card_text.innerHTML = html;
+}
+
+
 
 $(window).load(function () {
     $(".loader").delay(1000).fadeOut("slow");
