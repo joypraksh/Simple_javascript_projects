@@ -36,12 +36,12 @@
                                 <div class="col-sm-8">
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination">
-                                            <li class="page-item"><button type="button" class="btn btn-danger btn-sm"
+                                            <li class="page-item"><button type="button" class="btn btn-danger btn-sm" onclick="decreaseNum('text-box', 'itemVal')"
                                                     style="border-radius: 0%;"><i
                                                         class="fa-solid fa-minus"></i></button></li>
-                                            <li class="page-item"><input type="text" class="page-link" value="0"
+                                            <li class="page-item"><input type="text" class="page-link" id="text-box" value="0"
                                                     style="width: 75px; height: 30px;"></li>
-                                            <li class="page-item"><button type="button" class="btn btn-success btn-sm"
+                                            <li class="page-item"><button type="button" class="btn btn-success btn-sm" onclick="increaseNum('text-box', 'itemVal')"
                                                     style="border-radius: 0%;"><i class="fa-solid fa-plus"></i></button>
                                             </li>
                                         </ul>
@@ -56,7 +56,7 @@
                                     <i class="fa-solid fa-heart" style="color: red;"></i> Move to wish list
                                 </div>
                                 <div class="col-sm-4">
-                                    <h5>$ 0.00</h5>
+                                    <h5>$<span id="itemVal">0.00</span></h5>
                                 </div>
                             </div>
                         </div>
@@ -81,12 +81,12 @@
                                 <div class="col-sm-8">
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination">
-                                            <li class="page-item"><button type="button" class="btn btn-danger btn-sm"
+                                            <li class="page-item"><button type="button" class="btn btn-danger btn-sm" onclick="decreaseNum('text-box1', 'itemVal1')"
                                                     style="border-radius: 0%;"><i
                                                         class="fa-solid fa-minus"></i></button></li>
-                                            <li class="page-item"><input type="text" class="page-link" value="0"
+                                            <li class="page-item"><input type="text" class="page-link" id="text-box1" value="0"
                                                     style="width: 75px; height: 30px;"></li>
-                                            <li class="page-item"><button type="button" class="btn btn-success btn-sm"
+                                            <li class="page-item"><button type="button" class="btn btn-success btn-sm" onclick="increaseNum('text-box1', 'itemVal1')"
                                                     style="border-radius: 0%;"><i class="fa-solid fa-plus"></i></button>
                                             </li>
                                         </ul>
@@ -101,7 +101,7 @@
                                     <i class="fa-solid fa-heart" style="color: red;"></i> Move to wish list
                                 </div>
                                 <div class="col-sm-4">
-                                    <h5>$ 0.00</h5>
+                                    <h5>$<span id="itemVal1">0.00</span></h5>
                                 </div>
                             </div>
                         </div>
@@ -112,13 +112,13 @@
             <div class="col-md-6">
                 <div class="card shadow mt-5 p-3" style="background-color: #65b18e">
                     <h4 style="font-size: medium;">The Total Amount of</h4>
-                    <h5 style="font-size: medium;">Product amount <i style="float: right; font-size: medium;">$ 0.00</i>
+                    <h5 style="font-size: medium;">Product amount <i style="float: right; font-size: medium;">$ <span id="product_amount">0.00</span></i>
                     </h5>
-                    <h5 style="font-size: medium;">Shopping Charge <i style="float: right; font-size: medium;">$
-                            0.00</i></h5>
+                    <h5 style="font-size: medium;">Shopping Charge <i style="float: right; font-size: medium;">$ <span id="shipping_charge">40.00</span>
+                            </i></h5>
                     <hr>
                     <h5 style="font-size: medium;">The Total amount of(Including VAT) <i
-                            style="float: right; font-size: medium;">$ 0.00</i></h5>
+                            style="float: right; font-size: medium;">$ <span id="product_total_amount">0.00</span></i></h5>
                     <div>
                         <button type="button" class="btn btn-primary btn-sm mt-2">CHECKOUT</button>
                     </div>
@@ -129,10 +129,10 @@
                             style="float: right;  cursor: pointer;" id="arrowDown"></i></h4>
                     <div id="discountSection"
                         style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease;">
-                        <input type="text" class="form-control">
-                        <i id="message">Message is here</i>
+                        <input type="text" class="form-control" id="coupn">
+                        <i id="code">code is khanjan123</i>
                         <div>
-                            <button type="button" class="btn btn-primary btn-sm mt-2">Apply</button>
+                            <button type="button" class="btn btn-primary btn-sm mt-2" onclick="apply_coupn()">Apply</button>
                         </div>
                     </div>
                 </div>

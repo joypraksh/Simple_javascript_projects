@@ -7,10 +7,9 @@
   <link rel="stylesheet" href="bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <title>To Do APP</title>
   <style>
-    #modal {
+    #todoModal {
       display: none;
     }
   </style>
@@ -38,11 +37,8 @@
   </nav>
   <div class="container">
 
-    <!-- <form id="todo_form">
-      <input class="form-control mt-5 w-80" id="text_to_do" placeholder="Text here">
-      <button type="button" id="to-do" class="btn btn-success mt-4">TO DO</button>
-      <button type="button" id="click" class="btn btn-danger">click</button>
-    </form> -->
+    <button type="button" id="to-do-modal" class="btn btn-success mt-4" data-bs-toggle="modal" data-bs-target="#todoModal">
+      TO DO</button>
 
     <div class="row" id="card_text">
 
@@ -51,46 +47,51 @@
   </div>
 
   <!-- Bootstrap Modal -->
-  <div class="modal" id="modal">
+  <div class="modal">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="btn-close" id="close" aria-label="Close"><span aria-hidden="true"></span></button>
+          <h5 class="modal-title">Submit TODO</h5>
+          <button type="button" id="close-modal" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true"></span>
+          </button>
         </div>
         <div class="modal-body">
-          <form id="todo_form">
-            <input class="form-control mt-5 w-80" id="text_to_do" placeholder="Text here">
-            <button type="button" id="to-do" class="btn btn-success mt-4">TO DO</button>
+          <form action="" id="todo_form">
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="form-label mt-4">Text Your For Today</label>
+              <input type="text" id="text_to_do" class="form-control" placeholder="Text here">
+            </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" id="to-do" class="btn btn-success mt-4">TO DO</button>
+          <button type="button" id="to-do" class="btn btn-primary">ADD TODO</button>
+          <button type="button" id="close-modal" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
+  
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script src="script.js"></script>
   <script>
     $(window).on("load", function () {
       $("#preloader").fadeOut(3000);
     });
-
-    const to_do = document.querySelector('#to-do');
-    const modal = document.querySelector('#modal');
-    const close = document.querySelector('#close');
-    to_do.addEventListener('click', function () {
-      if(modal.style.display === 'none'){
-        modal.style.display = 'block';
-      }else{
-        modal.style.display = 'none';
-      }
+    const to_do_modal = document.querySelector('#to-do-modal');
+    const modal = document.querySelector('.modal');
+    const close_modal = document.querySelector('#close-modal');
+    to_do_modal.addEventListener('click', () => {
+    // Open the modal for adding a to-do item
+      modal.style.display = 'block';
     });
 
-    close.addEventListener('click', function () {
-    modal.style.display = 'none';
-  });
+    close_modal.addEventListener('click',()=>{
+      modal.style.display = 'none';
+    });
+
   </script>
 </body>
 
